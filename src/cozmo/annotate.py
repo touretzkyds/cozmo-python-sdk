@@ -124,7 +124,10 @@ class ImageText:
             The same :class:`PIL.ImageDraw.ImageDraw` object as was passed-in with text applied.
         '''
         (bx1, by1, bx2, by2) = bounds
-        text_width, text_height = draw.textsize(self.text, font=self.font)
+        # text_width, text_height = draw.textsize(self.text, font=self.font)
+        bbox = draw.textbox((0, 0), self.text, font=self.font)
+        text_width = bbox[2] - bbox[0]
+        text_height = bbox[3] - bbox[1]
 
         if self.position & TOP:
             y = by1
